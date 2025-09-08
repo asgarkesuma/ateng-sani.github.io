@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pangkat Pecahan - Pembelajaran Interaktif</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes glow {
+            from { box-shadow: 0 0 20px #00f5ff; }
+            to { box-shadow: 0 0 30px #00f5ff, 0 0 40px #00f5ff; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .neon-text {
+            text-shadow: 0 0 10px #00f5ff, 0 0 20px #00f5ff, 0 0 30px #00f5ff;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-x-hidden">
+    <!-- Animated Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float"></div>
+        <div class="absolute top-3/4 right-1/4 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float" style="animation-delay: 1s;"></div>
+        <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float" style="animation-delay: 2s;"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="relative z-10 text-center py-12">
+        <h1 class="text-6xl font-bold neon-text mb-4 animate-pulse-slow">PANGKAT PECAHAN</h1>
+        <p class="text-xl text-cyan-300">Pembelajaran Interaktif Matematika Futuristik</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="relative z-10 flex justify-center mb-12">
+        <div class="glass-effect rounded-full px-8 py-4">
+            <div class="flex space-x-6">
+                <button onclick="showSection('materi')" class="nav-btn px-6 py-2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 transition-all duration-300 transform hover:scale-105">
+                    Materi
+                </button>
+                <button onclick="showSection('contoh')" class="nav-btn px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400 transition-all duration-300 transform hover:scale-105">
+                    Contoh Soal
+                </button>
+                <button onclick="showSection('latihan')" class="nav-btn px-6 py-2 rounded-full bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-400 hover:to-teal-400 transition-all duration-300 transform hover:scale-105">
+                    Latihan
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="relative z-10 max-w-6xl mx-auto px-6">
+        
+        <!-- Bagian 1: Materi -->
+        <section id="materi" class="section-content">
+            <div class="glass-effect rounded-3xl p-8 mb-8 animate-glow">
+                <h2 class="text-4xl font-bold text-cyan-300 mb-6 text-center">🔬 Masalah Awal & Penjelasan Materi</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-gradient-to-br from-red-900/30 to-orange-900/30 rounded-2xl p-6 border border-red-500/30">
+                        <h3 class="text-2xl font-bold text-red-300 mb-4">⚠️ Masalah Awal</h3>
+                        <p class="text-lg leading-relaxed mb-4">
+                            Bagaimana cara menghitung nilai dari ekspresi seperti berikut? 
+                            Apakah ada cara sistematis untuk menyelesaikan pangkat dengan eksponen pecahan?
+                        </p>
+                        <div class="space-y-3 mb-4">
+                            <div class="bg-gray-800/50 p-3 rounded font-mono text-lg">
+                                8<sup>2/3</sup> = ?
+                            </div>
+                            <div class="bg-gray-800/50 p-3 rounded font-mono text-lg">
+                                27<sup>1/3</sup> = ?
+                            </div>
+                        </div>
+                        <div class="bg-red-800/20 rounded-lg p-4">
+                            <p class="text-red-200 mb-2">Contoh masalah:</p>
+                            <div class="bg-gray-800/50 p-3 rounded font-mono text-lg">
+                                Berapa nilai dari 16<sup>3/4</sup> = ?
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 rounded-2xl p-6 border border-cyan-500/30">
+                        <h3 class="text-2xl font-bold text-cyan-300 mb-4">💡 Solusi: Pangkat Pecahan</h3>
+                        <p class="text-lg leading-relaxed mb-4">
+                            Pangkat pecahan dapat diselesaikan menggunakan konsep akar. 
+                        </p>
+                        <div class="bg-cyan-800/20 rounded-lg p-4 mb-4">
+                            <p class="text-cyan-200 mb-2">Bentuk umum:</p>
+                            <div class="bg-gray-800/50 p-3 rounded font-mono text-lg">
+                                a<sup>m/n</sup> = <sup>n</sup>√a<sup>m</sup> = (<sup>n</sup>√a)<sup>m</sup>
+                            </div>
+                        </div>
+                        <div class="bg-cyan-800/20 rounded-lg p-4">
+                            <p class="text-cyan-200 mb-2">Penyelesaian contoh masalah:</p>
+                            <div class="space-y-2 font-mono text-lg">
+                                <div class="bg-gray-800/50 p-3 rounded border-l-4 border-cyan-400">
+                                    16<sup>3/4</sup> = <sup>4</sup>√16<sup>3</sup>
+                                </div>
+                                <div class="bg-gray-800/50 p-3 rounded border-l-4 border-cyan-400">
+                                    = <sup>4</sup>√4096 = 8
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-gradient-to-r from-purple-900/30 to-blue-900/30 rounded-2xl p-6 border border-purple-500/30">
+                    <h3 class="text-3xl font-bold text-purple-300 mb-6 text-center">📚 Penjelasan Lengkap Pangkat Pecahan</h3>
+                    
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-purple-800/20 rounded-xl p-4">
+                            <h4 class="text-xl font-bold text-purple-200 mb-3">Definisi</h4>
+                            <p class="text-sm leading-relaxed">
+                                Pangkat pecahan a^(m/n) didefinisikan sebagai akar ke-n dari a pangkat m, 
+                                dimana a > 0, m dan n adalah bilangan bulat, dan n ≠ 0.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-blue-800/20 rounded-xl p-4">
+                            <h4 class="text-xl font-bold text-blue-200 mb-3">Rumus Dasar</h4>
+                            <div class="space-y-3 text-base font-mono">
+                                <div class="bg-gray-800/50 p-2 rounded">
+                                    a<sup>1/n</sup> = <sup>n</sup>√a
+                                </div>
+                                <div class="bg-gray-800/50 p-2 rounded">
+                                    a<sup>m/n</sup> = <sup>n</sup>√a<sup>m</sup>
+                                </div>
+                                <div class="bg-gray-800/50 p-2 rounded">
+                                    a<sup>m/n</sup> = (<sup>n</sup>√a)<sup>m</sup>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-cyan-800/20 rounded-xl p-4">
+                            <h4 class="text-xl font-bold text-cyan-200 mb-3">Sifat-sifat</h4>
+                            <div class="space-y-3 text-base font-mono">
+                                <div class="bg-gray-800/50 p-2 rounded">
+                                    a<sup>p/q</sup> × a<sup>r/s</sup> = a<sup>(p/q + r/s)</sup>
+                                </div>
+                                <div class="bg-gray-800/50 p-2 rounded">
+                                    (a<sup>p/q</sup>)<sup>r/s</sup> = a<sup>pr/qs</sup>
+                                </div>
+                                <div class="bg-gray-800/50 p-2 rounded">
+                                    a<sup>-p/q</sup> = 1/a<sup>p/q</sup>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian 2: Contoh Soal -->
+        <section id="contoh" class="section-content hidden">
+            <div class="glass-effect rounded-3xl p-8 mb-8">
+                <h2 class="text-4xl font-bold text-purple-300 mb-8 text-center">📝 Contoh Soal Lengkap</h2>
+                
+                <!-- Contoh Soal 1 -->
+                <div class="mb-8 bg-gradient-to-br from-green-900/30 to-teal-900/30 rounded-2xl p-6 border border-green-500/30">
+                    <h3 class="text-2xl font-bold text-green-300 mb-4">Contoh 1</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-green-800/20 rounded-lg p-4">
+                            <h4 class="font-bold text-green-200 mb-2">📋 Soal:</h4>
+                            <div class="text-lg font-mono bg-gray-800/50 p-3 rounded">
+                                Hitunglah nilai dari 8<sup>2/3</sup>!
+                            </div>
+                        </div>
+                        
+                        <div class="bg-blue-800/20 rounded-lg p-4">
+                            <h4 class="font-bold text-blue-200 mb-2">📊 Diketahui:</h4>
+                            <div class="text-lg font-mono bg-gray-800/50 p-3 rounded">
+                                8<sup>2/3</sup>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-purple-800/20 rounded-lg p-4">
+                            <h4 class="font-bold text-purple-200 mb-2">❓ Ditanya:</h4>
+                            <div class="text-lg font-mono bg-gray-800/50 p-3 rounded">
+                                Nilai dari 8<sup>2/3</sup> = ?
+                            </div>
+                        </div>
+                        
+                        <div class="bg-yellow-800/20 rounded-lg p-4">
+                            <h4 class="font-bold text-yellow-200 mb-2">🔧 Penyelesaian:</h4>
+                            <div class="space-y-3 text-lg font-mono">
+                                <div class="bg-gray-800/50 p-3 rounded border-l-4 border-yellow-400">
+                                    <div class="text-yellow-100 text-sm mb-1">Langkah 1: Gunakan rumus a<sup>m/n</sup> = (<sup>n</sup>√a)<sup>m</sup></div>
+                                    8<sup>2/3</sup> = (<sup>3</sup>√8)<sup>2</sup>
+                                </div>
+                                <div class="bg-gray-800/50 p-3 rounded border-l-4 border-yellow-400">
+                                    <div class="text-yellow-100 text-sm mb-1">Langkah 2: Hitung akar kubik dari 8</div>
+                                    <sup>3</sup>√8 = 2 &nbsp;&nbsp;&nbsp; (karena 2 × 2 × 2 = 2³ = 8)
+                                </div>
+                                <div class="bg-gray-800/50 p-3 rounded border-l-4 border-yellow-400">
+                                    <div class="text-yellow-100 text-sm mb-1">Langkah 3: Substitusi hasil akar kubik</div>
+                                    (<sup>3</sup>√8)<sup>2</sup> = 2<sup>2</sup>
+                                </div>
+                                <div class="bg-gray-800/50 p-3 rounded border-l-4 border-yellow-400">
+                                    <div class="text-yellow-100 text-sm mb-1">Langkah 4: Hitung pangkat dua</div>
+                                    2<sup>2</sup> = 2 × 2 = 4
+                                </div>
+                                <div class="bg-gray-800/50 p-3 rounded border-l-4 border-green-400">
+                                    <div class="text-green-100 text-sm mb-1">Hasil Akhir:</div>
+                                    8<sup>2/3</sup> = 4
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-cyan-800/20 rounded-lg p-4">
+                            <h4 class="font-bold text-cyan-200 mb-2">✅ Kesimpulan:</h4>
+                            <div class="text-lg font-mono bg-gray-800/50 p-3 rounded">
+                                Jadi, nilai dari 8<sup>2/3</sup> = 4
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contoh Soal 2 -->
+                <div class="mb-8 bg-gradient-to-br from-orange-900/30 to-red-900/30 rounded-2xl p-6 border border-orange-500/30">
+                    <h3 class="text-2xl font-bold text-orange-300 mb-4">Contoh 2</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-orange-800/20 rounded-lg p-4">
+                            <h4 class="font-bold text-orange-200 mb-2">📋 Soal:</h4>
+                            <div class="text-lg font-mono bg-gray-800/50 p-3 rounded">
+                                Sederhanakan bentuk 16<sup>3/4</sup> × 16<sup>1/4</sup>!
+                            </div>
+                        </div>
+                        
+                        <div class="bg-blue-800/20 rounded-lg p-4">
+                            <h4 class="font-bold text-blue-200 mb-2">📊 Diketahui:</h4>
+                            <div class="text-lg font-mono bg-gray-800/50 p-3 rounded">
+                                16<sup>3/4</sup> × 16<sup>1/4</sup>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-purple-800/20 rounded-lg p-4">
+                            <h4 class="font-bold text-purple-200 mb-2">❓ Ditanya:</h4>
+                            <div class="text-lg font-mono bg-gray-800/50 p-3 rounded">
+                                Bentuk sederhana dari 16<sup>3/4</sup> × 16<sup>1/4</sup> = ?
+                            </div>
+                        </div>
+                        
+                        <div class="bg-yellow-800/20 rounded-lg p-4">
+                            <h4 class="font-bold text-yellow-200 mb-2">🔧 Penyelesaian:</h4>
+                            <div class="space-y-3 text-lg font-mono">
+                                <div class="bg-gray-800/50 p-3 rounded border-l-4 border-yellow-400">
+                                    16<sup>3/4</sup> × 16<sup>1/4</sup> = 16<sup>(3/4 + 1/4)</sup>
+                                </div>
+                                <div class="bg-gray-800/50 p-3 rounded border-l-4 border-yellow-400">
+                                    = 16<sup>4/4</sup>
+                                </div>
+                                <div class="bg-gray-800/50 p-3 rounded border-l-4 border-yellow-400">
+                                    = 16¹ = 16
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-cyan-800/20 rounded-lg p-4">
+                            <h4 class="font-bold text-cyan-200 mb-2">✅ Kesimpulan:</h4>
+                            <div class="text-lg font-mono bg-gray-800/50 p-3 rounded">
+                                Jadi, 16<sup>3/4</sup> × 16<sup>1/4</sup> = 16
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contoh Soal 3 -->
+                <div class="mb-8 bg-gradient-to-br from-pink-900/30 to-purple-900/30 rounded-2xl p-6 border border-pink-500/30">
+                    <h3 class="text-2xl font-bold text-pink-300 mb-4">Contoh 3</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-pink-800/20 rounded-lg p-4">
+                            <h4 class="font-bold text-pink-200 mb-2">📋 Soal:</h4>
+                            <div class="text-lg font-mono bg-gray-800/50 p-3 rounded">
+                                Hitunglah nilai dari (27<sup>1/3</sup>)²!
+                            </div>
+                        </div>
+                        
+                        <div class="bg-blue-800/20 rounded-lg p-4">
+                            <h4 class="font-bold text-blue-200 mb-2">📊 Diketahui:</h4>
+                            <div class="text-lg font-mono bg-gray-800/50 p-3 rounded">
+                                (27<sup>1/3</sup>)²
+                            </div>
+                        </div>
+                        
+                        <div class="bg-purple-800/20 rounded-lg p-4">
+                            <h4 class="font-bold text-purple-200 mb-2">❓ Ditanya:</h4>
+                            <div class="text-lg font-mono bg-gray-800/50 p-3 rounded">
+                                Nilai dari (27<sup>1/3</sup>)² = ?
+                            </div>
+                        </div>
+                        
+                        <div class="bg-yellow-800/20 rounded-lg p-4">
+                            <h4 class="font-bold text-yellow-200 mb-2">🔧 Penyelesaian:</h4>
+                            <div class="space-y-3 text-lg font-mono">
+                                <div class="bg-gray-800/50 p-3 rounded border-l-4 border-yellow-400">
+                                    27<sup>1/3</sup> = <sup>3</sup>√27 = 3 &nbsp;&nbsp;&nbsp; (karena 3³ = 27)
+                                </div>
+                                <div class="bg-gray-800/50 p-3 rounded border-l-4 border-yellow-400">
+                                    (27<sup>1/3</sup>)² = 3² = 9
+                                </div>
+                                <div class="bg-gray-800/50 p-3 rounded border-l-4 border-yellow-400">
+                                    Atau: (27<sup>1/3</sup>)² = 27<sup>2/3</sup> = 9
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-cyan-800/20 rounded-lg p-4">
+                            <h4 class="font-bold text-cyan-200 mb-2">✅ Kesimpulan:</h4>
+                            <div class="text-lg font-mono bg-gray-800/50 p-3 rounded">
+                                Jadi, nilai dari (27<sup>1/3</sup>)² = 9
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian 3: Latihan Soal -->
+        <section id="latihan" class="section-content hidden">
+            <div class="glass-effect rounded-3xl p-8 mb-8">
+                <h2 class="text-4xl font-bold text-green-300 mb-8 text-center">🎯 Latihan Soal</h2>
+                
+                <!-- Pilihan Ganda -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-cyan-300 mb-6">A. Pilihan Ganda</h3>
+                    
+                    <!-- Soal PG 1 -->
+                    <div class="mb-6 bg-gradient-to-r from-blue-900/30 to-cyan-900/30 rounded-xl p-6 border border-blue-500/30">
+                        <div class="text-lg mb-4 font-mono bg-gray-800/50 p-3 rounded">
+                            <strong>1.</strong> Nilai dari 9<sup>1/2</sup> adalah...
+                        </div>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-blue-800/20 p-2 rounded">
+                                <input type="radio" name="pg1" value="a" class="text-blue-500">
+                                <span>a. 3</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-blue-800/20 p-2 rounded">
+                                <input type="radio" name="pg1" value="b" class="text-blue-500">
+                                <span>b. 4.5</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-blue-800/20 p-2 rounded">
+                                <input type="radio" name="pg1" value="c" class="text-blue-500">
+                                <span>c. 9</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-blue-800/20 p-2 rounded">
+                                <input type="radio" name="pg1" value="d" class="text-blue-500">
+                                <span>d. 81</span>
+                            </label>
+                        </div>
+                        <div id="result-pg1" class="mt-4 hidden"></div>
+                        <button onclick="checkPG('pg1', 'a', 'result-pg1')" class="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors">Cek Jawaban</button>
+                    </div>
+
+                    <!-- Soal PG 2-5 -->
+                    <div class="mb-6 bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-xl p-6 border border-purple-500/30">
+                        <div class="text-lg mb-4 font-mono bg-gray-800/50 p-3 rounded">
+                            <strong>2.</strong> Hasil dari 32<sup>2/5</sup> adalah...
+                        </div>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-purple-800/20 p-2 rounded">
+                                <input type="radio" name="pg2" value="a" class="text-purple-500">
+                                <span>a. 2</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-purple-800/20 p-2 rounded">
+                                <input type="radio" name="pg2" value="b" class="text-purple-500">
+                                <span>b. 4</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-purple-800/20 p-2 rounded">
+                                <input type="radio" name="pg2" value="c" class="text-purple-500">
+                                <span>c. 8</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-purple-800/20 p-2 rounded">
+                                <input type="radio" name="pg2" value="d" class="text-purple-500">
+                                <span>d. 16</span>
+                            </label>
+                        </div>
+                        <div id="result-pg2" class="mt-4 hidden"></div>
+                        <button onclick="checkPG('pg2', 'b', 'result-pg2')" class="mt-4 px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg transition-colors">Cek Jawaban</button>
+                    </div>
+
+                    <div class="mb-6 bg-gradient-to-r from-green-900/30 to-teal-900/30 rounded-xl p-6 border border-green-500/30">
+                        <div class="text-lg mb-4 font-mono bg-gray-800/50 p-3 rounded">
+                            <strong>3.</strong> Bentuk sederhana dari 4<sup>3/2</sup> adalah...
+                        </div>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-green-800/20 p-2 rounded">
+                                <input type="radio" name="pg3" value="a" class="text-green-500">
+                                <span>a. 6</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-green-800/20 p-2 rounded">
+                                <input type="radio" name="pg3" value="b" class="text-green-500">
+                                <span>b. 8</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-green-800/20 p-2 rounded">
+                                <input type="radio" name="pg3" value="c" class="text-green-500">
+                                <span>c. 12</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-green-800/20 p-2 rounded">
+                                <input type="radio" name="pg3" value="d" class="text-green-500">
+                                <span>d. 16</span>
+                            </label>
+                        </div>
+                        <div id="result-pg3" class="mt-4 hidden"></div>
+                        <button onclick="checkPG('pg3', 'b', 'result-pg3')" class="mt-4 px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg transition-colors">Cek Jawaban</button>
+                    </div>
+
+                    <div class="mb-6 bg-gradient-to-r from-orange-900/30 to-red-900/30 rounded-xl p-6 border border-orange-500/30">
+                        <div class="text-lg mb-4 font-mono bg-gray-800/50 p-3 rounded">
+                            <strong>4.</strong> Nilai dari 125<sup>1/3</sup> adalah...
+                        </div>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-orange-800/20 p-2 rounded">
+                                <input type="radio" name="pg4" value="a" class="text-orange-500">
+                                <span>a. 3</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-orange-800/20 p-2 rounded">
+                                <input type="radio" name="pg4" value="b" class="text-orange-500">
+                                <span>b. 5</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-orange-800/20 p-2 rounded">
+                                <input type="radio" name="pg4" value="c" class="text-orange-500">
+                                <span>c. 25</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-orange-800/20 p-2 rounded">
+                                <input type="radio" name="pg4" value="d" class="text-orange-500">
+                                <span>d. 125</span>
+                            </label>
+                        </div>
+                        <div id="result-pg4" class="mt-4 hidden"></div>
+                        <button onclick="checkPG('pg4', 'b', 'result-pg4')" class="mt-4 px-4 py-2 bg-orange-600 hover:bg-orange-700 rounded-lg transition-colors">Cek Jawaban</button>
+                    </div>
+
+                    <div class="mb-6 bg-gradient-to-r from-indigo-900/30 to-purple-900/30 rounded-xl p-6 border border-indigo-500/30">
+                        <div class="text-lg mb-4 font-mono bg-gray-800/50 p-3 rounded">
+                            <strong>5.</strong> Hasil dari 64<sup>2/3</sup> adalah...
+                        </div>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-indigo-800/20 p-2 rounded">
+                                <input type="radio" name="pg5" value="a" class="text-indigo-500">
+                                <span>a. 8</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-indigo-800/20 p-2 rounded">
+                                <input type="radio" name="pg5" value="b" class="text-indigo-500">
+                                <span>b. 16</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-indigo-800/20 p-2 rounded">
+                                <input type="radio" name="pg5" value="c" class="text-indigo-500">
+                                <span>c. 32</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-indigo-800/20 p-2 rounded">
+                                <input type="radio" name="pg5" value="d" class="text-indigo-500">
+                                <span>d. 64</span>
+                            </label>
+                        </div>
+                        <div id="result-pg5" class="mt-4 hidden"></div>
+                        <button onclick="checkPG('pg5', 'b', 'result-pg5')" class="mt-4 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors">Cek Jawaban</button>
+                    </div>
+                </div>
+
+                <!-- Benar/Salah -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-cyan-300 mb-6">B. Benar atau Salah</h3>
+                    
+                    <div class="mb-6 bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-xl p-6 border border-yellow-500/30">
+                        <p class="text-lg mb-4"><strong>1.</strong> 16^(1/4) = 2</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-yellow-800/20 p-2 rounded">
+                                <input type="radio" name="bs1" value="benar" class="text-yellow-500">
+                                <span>Benar</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-yellow-800/20 p-2 rounded">
+                                <input type="radio" name="bs1" value="salah" class="text-yellow-500">
+                                <span>Salah</span>
+                            </label>
+                        </div>
+                        <div id="result-bs1" class="mt-4 hidden"></div>
+                        <button onclick="checkBS('bs1', 'benar', 'result-bs1')" class="mt-4 px-4 py-2 bg-yellow-600 hover:bg-yellow-700 rounded-lg transition-colors">Cek Jawaban</button>
+                    </div>
+
+                    <div class="mb-6 bg-gradient-to-r from-pink-900/30 to-red-900/30 rounded-xl p-6 border border-pink-500/30">
+                        <p class="text-lg mb-4"><strong>2.</strong> 27^(2/3) = 6</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-pink-800/20 p-2 rounded">
+                                <input type="radio" name="bs2" value="benar" class="text-pink-500">
+                                <span>Benar</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-pink-800/20 p-2 rounded">
+                                <input type="radio" name="bs2" value="salah" class="text-pink-500">
+                                <span>Salah</span>
+                            </label>
+                        </div>
+                        <div id="result-bs2" class="mt-4 hidden"></div>
+                        <button onclick="checkBS('bs2', 'salah', 'result-bs2')" class="mt-4 px-4 py-2 bg-pink-600 hover:bg-pink-700 rounded-lg transition-colors">Cek Jawaban</button>
+                    </div>
+                </div>
+
+                <!-- Isian Singkat -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-cyan-300 mb-6">C. Isian Singkat</h3>
+                    
+                    <div class="mb-6 bg-gradient-to-r from-teal-900/30 to-cyan-900/30 rounded-xl p-6 border border-teal-500/30">
+                        <p class="text-lg mb-4"><strong>1.</strong> 81^(1/4) = ...</p>
+                        <input type="text" id="isian1" class="w-32 px-4 py-2 bg-gray-800 border border-teal-500 rounded-lg text-white" placeholder="Jawaban">
+                        <div id="result-isian1" class="mt-4 hidden"></div>
+                        <button onclick="checkIsian('isian1', '3', 'result-isian1')" class="mt-4 ml-4 px-4 py-2 bg-teal-600 hover:bg-teal-700 rounded-lg transition-colors">Cek Jawaban</button>
+                    </div>
+
+                    <div class="mb-6 bg-gradient-to-r from-violet-900/30 to-purple-900/30 rounded-xl p-6 border border-violet-500/30">
+                        <p class="text-lg mb-4"><strong>2.</strong> 100^(1/2) = ...</p>
+                        <input type="text" id="isian2" class="w-32 px-4 py-2 bg-gray-800 border border-violet-500 rounded-lg text-white" placeholder="Jawaban">
+                        <div id="result-isian2" class="mt-4 hidden"></div>
+                        <button onclick="checkIsian('isian2', '10', 'result-isian2')" class="mt-4 ml-4 px-4 py-2 bg-violet-600 hover:bg-violet-700 rounded-lg transition-colors">Cek Jawaban</button>
+                    </div>
+                </div>
+
+                <!-- Uraian -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-cyan-300 mb-6">D. Uraian</h3>
+                    
+                    <div class="bg-gradient-to-r from-emerald-900/30 to-green-900/30 rounded-xl p-6 border border-emerald-500/30">
+                        <p class="text-lg mb-4"><strong>1.</strong> Hitunglah nilai dari 243^(2/5) dan jelaskan langkah-langkahnya!</p>
+                        <textarea id="uraian1" rows="6" class="w-full px-4 py-2 bg-gray-800 border border-emerald-500 rounded-lg text-white resize-none" placeholder="Tuliskan jawaban dan langkah-langkah penyelesaian..."></textarea>
+                        <div id="result-uraian1" class="mt-4 hidden"></div>
+                        <button onclick="checkUraian()" class="mt-4 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 rounded-lg transition-colors">Lihat Pembahasan</button>
+                    </div>
+                </div>
+
+                <!-- Tombol Reset -->
+                <div class="text-center">
+                    <button onclick="resetLatihan()" class="px-8 py-3 bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-500 hover:to-pink-500 rounded-full text-white font-bold transition-all duration-300 transform hover:scale-105">
+                        🔄 Reset Semua Jawaban
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 text-center py-8 mt-12">
+        <div class="glass-effect rounded-2xl mx-auto max-w-md py-4">
+            <p class="text-cyan-300">© 2024 Pembelajaran Pangkat Pecahan</p>
+            <p class="text-sm text-gray-400">Matematika Interaktif Futuristik</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.section-content').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionName).classList.remove('hidden');
+            
+            // Update nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('animate-glow');
+            });
+            event.target.classList.add('animate-glow');
+        }
+
+        // Check Pilihan Ganda
+        function checkPG(name, correct, resultId) {
+            const selected = document.querySelector(`input[name="${name}"]:checked`);
+            const resultDiv = document.getElementById(resultId);
+            
+            if (!selected) {
+                resultDiv.innerHTML = '<p class="text-yellow-300">⚠️ Pilih jawaban terlebih dahulu!</p>';
+                resultDiv.classList.remove('hidden');
+                return;
+            }
+            
+            if (selected.value === correct) {
+                resultDiv.innerHTML = '<p class="text-green-300">✅ Benar! Jawaban Anda tepat.</p>';
+            } else {
+                resultDiv.innerHTML = '<p class="text-red-300">❌ Salah. Coba lagi!</p>';
+            }
+            resultDiv.classList.remove('hidden');
+        }
+
+        // Check Benar/Salah
+        function checkBS(name, correct, resultId) {
+            const selected = document.querySelector(`input[name="${name}"]:checked`);
+            const resultDiv = document.getElementById(resultId);
+            
+            if (!selected) {
+                resultDiv.innerHTML = '<p class="text-yellow-300">⚠️ Pilih jawaban terlebih dahulu!</p>';
+                resultDiv.classList.remove('hidden');
+                return;
+            }
+            
+            if (selected.value === correct) {
+                resultDiv.innerHTML = '<p class="text-green-300">✅ Benar!</p>';
+            } else {
+                resultDiv.innerHTML = '<p class="text-red-300">❌ Salah. Coba lagi!</p>';
+            }
+            resultDiv.classList.remove('hidden');
+        }
+
+        // Check Isian
+        function checkIsian(inputId, correct, resultId) {
+            const input = document.getElementById(inputId);
+            const resultDiv = document.getElementById(resultId);
+            const answer = input.value.trim();
+            
+            if (!answer) {
+                resultDiv.innerHTML = '<p class="text-yellow-300">⚠️ Isi jawaban terlebih dahulu!</p>';
+                resultDiv.classList.remove('hidden');
+                return;
+            }
+            
+            if (answer === correct) {
+                resultDiv.innerHTML = '<p class="text-green-300">✅ Benar!</p>';
+            } else {
+                resultDiv.innerHTML = `<p class="text-red-300">❌ Salah. Jawaban yang benar: ${correct}</p>`;
+            }
+            resultDiv.classList.remove('hidden');
+        }
+
+        // Check Uraian
+        function checkUraian() {
+            const resultDiv = document.getElementById('result-uraian1');
+            const pembahasan = `
+                <div class="bg-blue-800/20 rounded-lg p-4 mt-4">
+                    <h4 class="font-bold text-blue-200 mb-2">💡 Pembahasan:</h4>
+                    <div class="space-y-2 text-sm">
+                        <p><strong>Langkah 1:</strong> 243^(2/5) = (<sup>5</sup>√243)²</p>
+                        <p><strong>Langkah 2:</strong> Cari <sup>5</sup>√243</p>
+                        <p>243 = 3⁵, maka <sup>5</sup>√243 = 3</p>
+                        <p><strong>Langkah 3:</strong> (<sup>5</sup>√243)² = 3² = 9</p>
+                        <p><strong>Jawaban:</strong> 243^(2/5) = 9</p>
+                    </div>
+                </div>
+            `;
+            resultDiv.innerHTML = pembahasan;
+            resultDiv.classList.remove('hidden');
+        }
+
+        // Reset Latihan
+        function resetLatihan() {
+            // Reset radio buttons
+            document.querySelectorAll('input[type="radio"]').forEach(input => {
+                input.checked = false;
+            });
+            
+            // Reset text inputs
+            document.querySelectorAll('input[type="text"], textarea').forEach(input => {
+                input.value = '';
+            });
+            
+            // Hide all results
+            document.querySelectorAll('[id^="result-"]').forEach(div => {
+                div.classList.add('hidden');
+            });
+            
+            alert('🔄 Semua jawaban telah direset!');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('materi');
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97bf332ed02d6141',t:'MTc1NzM0MjQxNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
