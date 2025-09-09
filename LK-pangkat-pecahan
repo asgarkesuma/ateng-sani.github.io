@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LKPD Interaktif - Pangkat Pecahan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-shadow { box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .answer-correct { background-color: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .answer-incorrect { background-color: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+        .pulse-animation { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <div class="gradient-bg text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-2">📚 LKPD Interaktif</h1>
+            <h2 class="text-2xl font-semibold mb-2">Pangkat Pecahan</h2>
+            <p class="text-lg opacity-90">Kelas XI • Matematika Wajib</p>
+            <div class="mt-4 bg-white bg-opacity-20 rounded-lg p-3 inline-block">
+                <p class="text-sm">⏱️ Waktu: 45 menit | 🎯 Target: Memahami konsep pangkat pecahan</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Progress Bar -->
+        <div class="mb-8">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-sm font-medium text-gray-700">Progress Pembelajaran</span>
+                <span class="text-sm font-medium text-gray-700" id="progress-text">0%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3">
+                <div class="bg-gradient-to-r from-blue-500 to-purple-600 h-3 rounded-full transition-all duration-500" id="progress-bar" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <!-- Tujuan Pembelajaran -->
+        <div class="bg-white rounded-xl card-shadow p-6 mb-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                🎯 Tujuan Pembelajaran
+            </h3>
+            <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start">
+                    <span class="text-green-500 mr-2">✓</span>
+                    Memahami definisi dan konsep pangkat pecahan
+                </li>
+                <li class="flex items-start">
+                    <span class="text-green-500 mr-2">✓</span>
+                    Mengubah bentuk akar menjadi pangkat pecahan dan sebaliknya
+                </li>
+                <li class="flex items-start">
+                    <span class="text-green-500 mr-2">✓</span>
+                    Menyelesaikan operasi hitung pada pangkat pecahan
+                </li>
+            </ul>
+        </div>
+
+        <!-- Materi -->
+        <div class="bg-white rounded-xl card-shadow p-6 mb-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                📖 Materi: Pangkat Pecahan
+            </h3>
+            
+            <div class="space-y-6">
+                <div class="bg-blue-50 rounded-lg p-4">
+                    <h4 class="font-semibold text-blue-800 mb-2">Definisi Pangkat Pecahan</h4>
+                    <p class="text-gray-700 mb-3">Pangkat pecahan adalah bentuk pangkat dengan eksponen berupa pecahan.</p>
+                    <div class="bg-white p-3 rounded border-l-4 border-blue-500">
+                        <p class="text-center text-lg">$a^{\frac{m}{n}} = \sqrt[n]{a^m} = (\sqrt[n]{a})^m$</p>
+                        <p class="text-sm text-gray-600 mt-2 text-center">dimana $a > 0$, $m, n \in \mathbb{Z}$, dan $n \neq 0$</p>
+                    </div>
+                </div>
+
+                <div class="bg-green-50 rounded-lg p-4">
+                    <h4 class="font-semibold text-green-800 mb-2">Contoh Konversi</h4>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-white p-3 rounded">
+                            <p class="font-medium">Bentuk Akar → Pangkat Pecahan:</p>
+                            <p>$\sqrt{a} = a^{\frac{1}{2}}$</p>
+                            <p>$\sqrt[3]{a^2} = a^{\frac{2}{3}}$</p>
+                        </div>
+                        <div class="bg-white p-3 rounded">
+                            <p class="font-medium">Pangkat Pecahan → Bentuk Akar:</p>
+                            <p>$a^{\frac{1}{4}} = \sqrt[4]{a}$</p>
+                            <p>$a^{\frac{3}{5}} = \sqrt[5]{a^3}$</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Aktivitas 1: Konversi Bentuk -->
+        <div class="bg-white rounded-xl card-shadow p-6 mb-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                🔄 Aktivitas 1: Konversi Bentuk
+            </h3>
+            <p class="text-gray-600 mb-4">Ubah bentuk akar berikut menjadi pangkat pecahan!</p>
+            
+            <div class="space-y-4" id="conversion-questions">
+                <div class="conversion-item bg-gray-50 p-4 rounded-lg">
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg">$\sqrt{x}$ = </span>
+                        <div class="flex space-x-2">
+                            <button class="conversion-btn px-4 py-2 bg-blue-100 hover:bg-blue-200 rounded-lg transition-colors" data-answer="correct">$x^{\frac{1}{2}}$</button>
+                            <button class="conversion-btn px-4 py-2 bg-blue-100 hover:bg-blue-200 rounded-lg transition-colors" data-answer="wrong">$x^2$</button>
+                            <button class="conversion-btn px-4 py-2 bg-blue-100 hover:bg-blue-200 rounded-lg transition-colors" data-answer="wrong">$\frac{1}{x^2}$</button>
+                        </div>
+                    </div>
+                    <div class="feedback mt-2 hidden"></div>
+                </div>
+
+                <div class="conversion-item bg-gray-50 p-4 rounded-lg">
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg">$\sqrt[3]{x^2}$ = </span>
+                        <div class="flex space-x-2">
+                            <button class="conversion-btn px-4 py-2 bg-blue-100 hover:bg-blue-200 rounded-lg transition-colors" data-answer="wrong">$x^{\frac{3}{2}}$</button>
+                            <button class="conversion-btn px-4 py-2 bg-blue-100 hover:bg-blue-200 rounded-lg transition-colors" data-answer="correct">$x^{\frac{2}{3}}$</button>
+                            <button class="conversion-btn px-4 py-2 bg-blue-100 hover:bg-blue-200 rounded-lg transition-colors" data-answer="wrong">$x^6$</button>
+                        </div>
+                    </div>
+                    <div class="feedback mt-2 hidden"></div>
+                </div>
+
+                <div class="conversion-item bg-gray-50 p-4 rounded-lg">
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg">$\sqrt[4]{x^3}$ = </span>
+                        <div class="flex space-x-2">
+                            <button class="conversion-btn px-4 py-2 bg-blue-100 hover:bg-blue-200 rounded-lg transition-colors" data-answer="wrong">$x^{\frac{4}{3}}$</button>
+                            <button class="conversion-btn px-4 py-2 bg-blue-100 hover:bg-blue-200 rounded-lg transition-colors" data-answer="wrong">$x^{12}$</button>
+                            <button class="conversion-btn px-4 py-2 bg-blue-100 hover:bg-blue-200 rounded-lg transition-colors" data-answer="correct">$x^{\frac{3}{4}}$</button>
+                        </div>
+                    </div>
+                    <div class="feedback mt-2 hidden"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Aktivitas 2: Kalkulator Interaktif -->
+        <div class="bg-white rounded-xl card-shadow p-6 mb-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                🧮 Aktivitas 2: Kalkulator Pangkat Pecahan
+            </h3>
+            <p class="text-gray-600 mb-4">Hitung nilai pangkat pecahan berikut:</p>
+            
+            <div class="bg-gradient-to-r from-purple-100 to-blue-100 p-6 rounded-lg">
+                <div class="grid md:grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Basis (a):</label>
+                        <input type="number" id="base" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" value="8" min="1">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Pembilang (m):</label>
+                        <input type="number" id="numerator" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" value="2" min="1">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Penyebut (n):</label>
+                        <input type="number" id="denominator" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" value="3" min="1">
+                    </div>
+                </div>
+                
+                <div class="text-center mb-4">
+                    <div class="bg-white p-4 rounded-lg inline-block">
+                        <span class="text-2xl" id="expression">$8^{\frac{2}{3}}$</span>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button id="calculate" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all transform hover:scale-105 font-semibold">
+                        Hitung! 🚀
+                    </button>
+                </div>
+                
+                <div id="calculation-result" class="mt-4 text-center hidden">
+                    <div class="bg-white p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">Langkah Penyelesaian:</h4>
+                        <div id="steps" class="space-y-2 text-left"></div>
+                        <div class="mt-4 p-3 bg-green-100 rounded-lg">
+                            <span class="font-bold text-green-800">Hasil: </span>
+                            <span id="final-result" class="text-xl font-bold text-green-800"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Aktivitas 3: Masalah Kehidupan Sehari-hari -->
+        <div class="bg-white rounded-xl card-shadow p-6 mb-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                🌍 Aktivitas 3: Masalah Kehidupan Sehari-hari
+            </h3>
+            <p class="text-gray-600 mb-6">Mari terapkan konsep pangkat pecahan dalam situasi nyata!</p>
+            
+            <div class="space-y-8" id="real-life-problems">
+                <!-- Problem 1: Pertumbuhan Investasi -->
+                <div class="real-life-item bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-lg border-l-4 border-green-500">
+                    <div class="flex items-start space-x-4">
+                        <div class="text-4xl">💰</div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-lg mb-3">Masalah 1: Investasi dan Bunga Majemuk</h4>
+                            <p class="text-gray-700 mb-4">
+                                Andi menginvestasikan uang sebesar Rp 1.000.000 dengan bunga majemuk 8% per tahun. 
+                                Berapa nilai investasi Andi setelah 1,5 tahun?
+                            </p>
+                            <div class="bg-white p-4 rounded-lg mb-4">
+                                <p class="text-sm text-gray-600 mb-2">Rumus: $A = P(1 + r)^t$</p>
+                                <p class="text-sm">Dimana: P = Rp 1.000.000, r = 0,08, t = 1,5 tahun</p>
+                                <p class="text-sm">Maka: $A = 1.000.000 \times (1,08)^{1,5}$</p>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <span class="font-medium">Jawaban: Rp</span>
+                                <input type="number" class="real-life-input w-40 p-2 border rounded-lg focus:ring-2 focus:ring-green-500" data-answer="1115" placeholder="dalam ribuan">
+                                <span class="text-sm text-gray-500">(dalam ribuan)</span>
+                                <button class="check-real-life bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">Cek</button>
+                            </div>
+                            <div class="real-life-feedback mt-3 hidden"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Problem 2: Pertumbuhan Populasi -->
+                <div class="real-life-item bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-lg border-l-4 border-purple-500">
+                    <div class="flex items-start space-x-4">
+                        <div class="text-4xl">👥</div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-lg mb-3">Masalah 2: Pertumbuhan Populasi Bakteri</h4>
+                            <p class="text-gray-700 mb-4">
+                                Dalam sebuah laboratorium, populasi bakteri bertambah dengan rumus $P(t) = 1000 \times 2^{\frac{t}{3}}$, 
+                                dimana t adalah waktu dalam jam. Berapa populasi bakteri setelah 4,5 jam?
+                            </p>
+                            <div class="bg-white p-4 rounded-lg mb-4">
+                                <p class="text-sm text-gray-600 mb-2">Substitusi t = 4,5:</p>
+                                <p class="text-sm">$P(4,5) = 1000 \times 2^{\frac{4,5}{3}} = 1000 \times 2^{1,5}$</p>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <span class="font-medium">Jawaban:</span>
+                                <input type="number" class="real-life-input w-32 p-2 border rounded-lg focus:ring-2 focus:ring-purple-500" data-answer="2828" placeholder="bakteri">
+                                <span class="text-sm text-gray-500">bakteri</span>
+                                <button class="check-real-life bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition-colors">Cek</button>
+                            </div>
+                            <div class="real-life-feedback mt-3 hidden"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Problem 3: Fisika - Hukum Pendinginan -->
+                <div class="real-life-item bg-gradient-to-r from-orange-50 to-red-50 p-6 rounded-lg border-l-4 border-orange-500">
+                    <div class="flex items-start space-x-4">
+                        <div class="text-4xl">🌡️</div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-lg mb-3">Masalah 3: Pendinginan Kopi</h4>
+                            <p class="text-gray-700 mb-4">
+                                Suhu kopi yang baru diseduh adalah 90°C. Setelah t menit, suhunya mengikuti rumus 
+                                $T(t) = 25 + 65 \times (0,9)^{\frac{t}{2}}$. Berapa suhu kopi setelah 3 menit?
+                            </p>
+                            <div class="bg-white p-4 rounded-lg mb-4">
+                                <p class="text-sm text-gray-600 mb-2">Substitusi t = 3:</p>
+                                <p class="text-sm">$T(3) = 25 + 65 \times (0,9)^{\frac{3}{2}} = 25 + 65 \times (0,9)^{1,5}$</p>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <span class="font-medium">Jawaban:</span>
+                                <input type="number" class="real-life-input w-32 p-2 border rounded-lg focus:ring-2 focus:ring-orange-500" data-answer="80" placeholder="°C">
+                                <span class="text-sm text-gray-500">°C (bulatkan)</span>
+                                <button class="check-real-life bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors">Cek</button>
+                            </div>
+                            <div class="real-life-feedback mt-3 hidden"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Problem 4: Geometri - Volume -->
+                <div class="real-life-item bg-gradient-to-r from-teal-50 to-cyan-50 p-6 rounded-lg border-l-4 border-teal-500">
+                    <div class="flex items-start space-x-4">
+                        <div class="text-4xl">📦</div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-lg mb-3">Masalah 4: Desain Kemasan</h4>
+                            <p class="text-gray-700 mb-4">
+                                Sebuah perusahaan ingin membuat kemasan berbentuk kubus dengan volume 216 cm³. 
+                                Berapa panjang rusuk kemasan tersebut? (Gunakan $216^{\frac{1}{3}}$)
+                            </p>
+                            <div class="bg-white p-4 rounded-lg mb-4">
+                                <p class="text-sm text-gray-600 mb-2">Volume kubus: $V = s^3$</p>
+                                <p class="text-sm">Maka: $s = V^{\frac{1}{3}} = 216^{\frac{1}{3}} = \sqrt[3]{216}$</p>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <span class="font-medium">Jawaban:</span>
+                                <input type="number" class="real-life-input w-32 p-2 border rounded-lg focus:ring-2 focus:ring-teal-500" data-answer="6" placeholder="cm">
+                                <span class="text-sm text-gray-500">cm</span>
+                                <button class="check-real-life bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-600 transition-colors">Cek</button>
+                            </div>
+                            <div class="real-life-feedback mt-3 hidden"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Aktivitas 4: Soal Latihan -->
+        <div class="bg-white rounded-xl card-shadow p-6 mb-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                📝 Aktivitas 4: Soal Latihan
+            </h3>
+            
+            <div class="space-y-6" id="practice-questions">
+                <div class="practice-item border-l-4 border-blue-500 pl-4">
+                    <p class="font-medium mb-3">1. Hitunglah nilai dari $16^{\frac{3}{4}}$</p>
+                    <input type="number" class="practice-input w-32 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500" data-answer="8">
+                    <button class="check-answer ml-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">Cek</button>
+                    <div class="practice-feedback mt-2 hidden"></div>
+                </div>
+
+                <div class="practice-item border-l-4 border-green-500 pl-4">
+                    <p class="font-medium mb-3">2. Hitunglah nilai dari $27^{\frac{2}{3}}$</p>
+                    <input type="number" class="practice-input w-32 p-2 border rounded-lg focus:ring-2 focus:ring-green-500" data-answer="9">
+                    <button class="check-answer ml-2 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">Cek</button>
+                    <div class="practice-feedback mt-2 hidden"></div>
+                </div>
+
+                <div class="practice-item border-l-4 border-purple-500 pl-4">
+                    <p class="font-medium mb-3">3. Hitunglah nilai dari $32^{\frac{3}{5}}$</p>
+                    <input type="number" class="practice-input w-32 p-2 border rounded-lg focus:ring-2 focus:ring-purple-500" data-answer="8">
+                    <button class="check-answer ml-2 bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition-colors">Cek</button>
+                    <div class="practice-feedback mt-2 hidden"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rangkuman -->
+        <div class="bg-gradient-to-r from-yellow-100 to-orange-100 rounded-xl p-6 mb-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                📋 Rangkuman
+            </h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="font-semibold mb-2">Rumus Utama:</h4>
+                    <ul class="space-y-1 text-sm">
+                        <li>• $a^{\frac{m}{n}} = \sqrt[n]{a^m}$</li>
+                        <li>• $a^{\frac{1}{n}} = \sqrt[n]{a}$</li>
+                        <li>• $a^{-\frac{m}{n}} = \frac{1}{a^{\frac{m}{n}}}$</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-2">Tips Mengerjakan:</h4>
+                    <ul class="space-y-1 text-sm">
+                        <li>• Ubah ke bentuk akar jika lebih mudah</li>
+                        <li>• Cari faktor yang mudah diakarkan</li>
+                        <li>• Gunakan sifat-sifat pangkat</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skor Akhir -->
+        <div class="bg-white rounded-xl card-shadow p-6 text-center">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">🏆 Skor Pembelajaran</h3>
+            <div class="text-6xl font-bold text-blue-600 mb-2" id="final-score">0</div>
+            <p class="text-gray-600 mb-4">dari 100 poin</p>
+            <div id="achievement-badge" class="hidden">
+                <div class="inline-block bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-3 rounded-full font-bold pulse-animation">
+                    🌟 Excellent! 🌟
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let score = 0;
+        let totalQuestions = 10; // 3 konversi + 4 kehidupan sehari-hari + 3 latihan
+        let answeredQuestions = 0;
+
+        // Update progress bar
+        function updateProgress() {
+            const progress = (answeredQuestions / totalQuestions) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = Math.round(progress) + '%';
+            
+            // Update final score
+            const finalScore = Math.round((score / totalQuestions) * 100);
+            document.getElementById('final-score').textContent = finalScore;
+            
+            if (finalScore >= 80) {
+                document.getElementById('achievement-badge').classList.remove('hidden');
+            }
+        }
+
+        // Aktivitas 1: Konversi
+        document.querySelectorAll('.conversion-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const item = this.closest('.conversion-item');
+                const feedback = item.querySelector('.feedback');
+                const allBtns = item.querySelectorAll('.conversion-btn');
+                
+                // Disable all buttons in this item
+                allBtns.forEach(b => b.disabled = true);
+                
+                if (this.dataset.answer === 'correct') {
+                    this.classList.add('answer-correct');
+                    feedback.innerHTML = '<span class="text-green-600">✅ Benar! Bagus sekali!</span>';
+                    score++;
+                } else {
+                    this.classList.add('answer-incorrect');
+                    // Show correct answer
+                    const correctBtn = item.querySelector('[data-answer="correct"]');
+                    correctBtn.classList.add('answer-correct');
+                    feedback.innerHTML = '<span class="text-red-600">❌ Kurang tepat. Jawaban yang benar ditandai dengan warna hijau.</span>';
+                }
+                
+                feedback.classList.remove('hidden');
+                answeredQuestions++;
+                updateProgress();
+            });
+        });
+
+        // Aktivitas 2: Kalkulator
+        function updateExpression() {
+            const base = document.getElementById('base').value;
+            const num = document.getElementById('numerator').value;
+            const den = document.getElementById('denominator').value;
+            document.getElementById('expression').textContent = `$${base}^{\\frac{${num}}{${den}}}$`;
+            MathJax.typesetPromise();
+        }
+
+        document.getElementById('base').addEventListener('input', updateExpression);
+        document.getElementById('numerator').addEventListener('input', updateExpression);
+        document.getElementById('denominator').addEventListener('input', updateExpression);
+
+        document.getElementById('calculate').addEventListener('click', function() {
+            const base = parseInt(document.getElementById('base').value);
+            const num = parseInt(document.getElementById('numerator').value);
+            const den = parseInt(document.getElementById('denominator').value);
+            
+            const result = Math.pow(base, num/den);
+            const nthRoot = Math.pow(base, 1/den);
+            const powered = Math.pow(nthRoot, num);
+            
+            const steps = [
+                `$${base}^{\\frac{${num}}{${den}}} = \\sqrt[${den}]{${base}^${num}}$`,
+                `$= \\sqrt[${den}]{${Math.pow(base, num)}}$`,
+                `$= (\\sqrt[${den}]{${base}})^${num}$`,
+                `$= ${nthRoot.toFixed(2)}^${num}$`,
+                `$= ${result.toFixed(2)}$`
+            ];
+            
+            document.getElementById('steps').innerHTML = steps.map(step => `<div>${step}</div>`).join('');
+            document.getElementById('final-result').textContent = result.toFixed(2);
+            document.getElementById('calculation-result').classList.remove('hidden');
+            
+            MathJax.typesetPromise();
+        });
+
+        // Aktivitas 3: Masalah Kehidupan Sehari-hari
+        document.querySelectorAll('.check-real-life').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const item = this.closest('.real-life-item');
+                const input = item.querySelector('.real-life-input');
+                const feedback = item.querySelector('.real-life-feedback');
+                const correctAnswer = parseFloat(input.dataset.answer);
+                const userAnswer = parseFloat(input.value);
+                
+                this.disabled = true;
+                input.disabled = true;
+                
+                // Allow some tolerance for real-life problems
+                const tolerance = correctAnswer * 0.05; // 5% tolerance
+                
+                if (Math.abs(userAnswer - correctAnswer) <= tolerance) {
+                    feedback.innerHTML = '<div class="bg-green-100 p-3 rounded-lg"><span class="text-green-700">✅ Benar! Kamu berhasil menerapkan pangkat pecahan dalam masalah nyata!</span></div>';
+                    input.classList.add('answer-correct');
+                    score++;
+                } else {
+                    feedback.innerHTML = `<div class="bg-red-100 p-3 rounded-lg"><span class="text-red-700">❌ Kurang tepat. Jawaban yang benar adalah ${correctAnswer}. Coba periksa kembali perhitunganmu!</span></div>`;
+                    input.classList.add('answer-incorrect');
+                }
+                
+                feedback.classList.remove('hidden');
+                answeredQuestions++;
+                updateProgress();
+            });
+        });
+
+        // Aktivitas 4: Soal Latihan
+        document.querySelectorAll('.check-answer').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const item = this.closest('.practice-item');
+                const input = item.querySelector('.practice-input');
+                const feedback = item.querySelector('.practice-feedback');
+                const correctAnswer = parseFloat(input.dataset.answer);
+                const userAnswer = parseFloat(input.value);
+                
+                this.disabled = true;
+                input.disabled = true;
+                
+                if (Math.abs(userAnswer - correctAnswer) < 0.01) {
+                    feedback.innerHTML = '<span class="text-green-600">✅ Benar! Excellent!</span>';
+                    input.classList.add('answer-correct');
+                    score++;
+                } else {
+                    feedback.innerHTML = `<span class="text-red-600">❌ Kurang tepat. Jawaban yang benar adalah ${correctAnswer}</span>`;
+                    input.classList.add('answer-incorrect');
+                }
+                
+                feedback.classList.remove('hidden');
+                answeredQuestions++;
+                updateProgress();
+            });
+        });
+
+        // Initialize
+        updateExpression();
+        updateProgress();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c3294904fcce52',t:'MTc1NzM4Mzk1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
